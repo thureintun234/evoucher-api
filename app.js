@@ -11,10 +11,7 @@ const helmet = require("helmet");
 const itemRouter = require("./routers/item.router");
 const userRouter = require("./routers/user.router");
 const orderRouter = require("./routers/order.router");
-const promotionRouter = require("./routers/promotion.router");
 const voucherRouter = require("./routers/voucher.router");
-
-logger.info("connectiong to", config.MONGODB_URI);
 
 mongoose
   .connect(config.MONGODB_URI)
@@ -36,7 +33,6 @@ app.use(helmet());
 app.use("/api/items", itemRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
-app.use("/api/promotions", promotionRouter);
 app.use("/api/vouchers", voucherRouter);
 
 // validation middlewares
