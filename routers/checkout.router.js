@@ -4,7 +4,7 @@ const Item = require("../models/item.model");
 const auth = require("../middleware/auth");
 const History = require("../models/history.model");
 
-router.post("/", auth, async (req, res) => {
+router.post("/order", auth, async (req, res) => {
   const item = await Item.findById(req.body.item_id);
   const order = new Order({
     evoucher_code: req.body.evoucher_code ? req.body.evoucher_code : null,
@@ -38,6 +38,15 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.get("/checkout/histories", auth, async (req, res) => {});
+router.get("/histories", auth, async (req, res) => {
+  try {
+    const histories = await History.find({})
+      .populate("order_id")
+      .populate("user_id");
+    res.json(histories);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 
 module.exports = router;
