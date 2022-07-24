@@ -24,7 +24,7 @@ This is a estore api for online store. Database, Flow diagrams and postman colle
 ### Configuration
 
 - change .env-sample to .env file in root directory
-- add resources and keys in .env file
+- keys are already added
 
 ### Installing and Start
 
