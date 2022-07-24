@@ -10,7 +10,7 @@ const helmet = require("helmet");
 
 const itemRouter = require("./routers/item.router");
 const userRouter = require("./routers/user.router");
-const orderRouter = require("./routers/order.router");
+const checkoutRouter = require("./routers/checkout.router");
 const voucherRouter = require("./routers/voucher.router");
 
 mongoose
@@ -32,7 +32,7 @@ app.use(helmet());
 // routes
 app.use("/api/items", itemRouter);
 app.use("/api/users", userRouter);
-app.use("/api/orders", orderRouter);
+app.use("/api/checkout", checkoutRouter);
 app.use("/api/vouchers", voucherRouter);
 
 // validation middlewares

@@ -26,6 +26,7 @@ const generatePromoCode = (user) => {
     }
     return result;
   }
+  // promodCode bounded with random 5 alphabet and 6 LAST USER PHONE NO
   const promoCode =
     makeid(5) +
     `${user.phone.toString().split("").reverse().join("").slice(0, 6)}`;
@@ -46,9 +47,12 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
 
   // reduce amount to 10% when method is visa
   if (req.body.payment_method === "Visa") {
-    req.body.amount = req.body.amount - req.body.amount / 10;
+    const visa_percentage = 10;
+    req.body.amount =
+      req.body.amount - req.body.amount * (visa_percentage / 100);
   }
 
+  // check for own usage or gift to other
   if (req.body.buy_type === "only me usage") {
     req.body.user_info = { name: req.user.name, phone: req.user.phone };
   } else if (req.body.buy_type === "gift to others") {
@@ -69,6 +73,7 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
     req.user
   );
 
+  // generating promo code depend on user phone
   const finalPromoCode = await generatePromoCode(req.user);
 
   // promo code
@@ -89,13 +94,29 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const vouchers = await Voucher.find({}).populate("promo_code", {
       promo_code: 1,
       qr_code: 1,
     });
     res.json(vouchers);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
+router.get("/:id", auth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const voucher = await Voucher.findById(id).populate("promo_code", {
+      promo_code: 1,
+      qr_code: 1,
+    });
+    if (!voucher) {
+      return res.status(404).json({ message: "voucher not found" });
+    }
+    res.json(voucher);
   } catch (e) {
     res.status(500).json(e);
   }
