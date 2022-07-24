@@ -297,6 +297,16 @@
 		{
 			"name": "Gel all vouchers",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -397,6 +407,77 @@
 						"api",
 						"checkout",
 						"histories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a voucher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "my voucher one updated ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/vouchers/62dd08dd5595f9b05ed31955",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vouchers",
+						"62dd08dd5595f9b05ed31955"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active evoucher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/vouchers/activate/62dd08dd5595f9b05ed31955",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vouchers",
+						"activate",
+						"62dd08dd5595f9b05ed31955"
 					]
 				}
 			},

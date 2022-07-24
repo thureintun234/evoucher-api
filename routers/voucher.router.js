@@ -122,4 +122,74 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+router.patch("/:id", auth, upload.single("image"), async (req, res) => {
+  //image buffer
+  if (req.file?.buffer) {
+    const buffer = await sharp(req.file?.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+    req.body.image = buffer;
+  }
+
+  if (req.body.amount || req.body.payment_method || req.body.buy_type) {
+    // set amount depend on quantity
+    const amount = 10 * Number(req.body?.quantity);
+    req.body.amount = amount;
+
+    // reduce amount to 10% when method is visa
+    if (req.body.payment_method === "Visa") {
+      const visa_percentage = 10;
+      req.body.amount =
+        req.body.amount - req.body.amount * (visa_percentage / 100);
+    }
+
+    // check for own usage or gift to other
+    if (req.body.buy_type === "only me usage") {
+      req.body.user_info = { name: req.user.name, phone: req.user.phone };
+    } else if (req.body.buy_type === "gift to others") {
+      req.body.user_info = {
+        name: req.body.user_info.name,
+        phone: req.user_info.phone,
+        gift_per_limit: 5,
+      };
+    }
+  }
+
+  try {
+    const updatedVoucher = await Voucher.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedVoucher) {
+      return res.status(404).json({ message: "Voucher Not Found" });
+    }
+    res.json(updatedVoucher);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
+router.patch("/activate/:id", auth, async (req, res) => {
+  const voucher = await Voucher.findById(req.params.id);
+
+  if (!voucher) {
+    return res.status(404).json({ message: "Voucher not found" });
+  }
+
+  try {
+    voucher.isActive = true;
+    voucher.expire_date = Date.now();
+    await voucher.save();
+    res.json(voucher);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;
