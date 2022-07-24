@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "00e1aeef-81a5-48f5-8f93-ff9e79295a26",
+		"name": "estore_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13753596"
+	},
+	"item": [
+		{
+			"name": "Create an User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"david\",\n    \"email\":\"david@gmail.com\",\n    \"phone\":\"0991011122\",\n    \"password\":\"Haha123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOTYzNDRkM2I5ZDNmYWE0ZGE1NzAiLCJpYXQiOjE2NTg2MjQzODB9.ub5n0Z9pcGDnBuQKUQy-H4BDB_WfAf-xUjy89grhhag",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"david@gmail.com\",\n    \"password\":\"Haha123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjQ5MDZ9.b1wG64bWQPv3KKxkMBTh989yVDptMKRlUY244O2BBdY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/hp/Pictures/harvard.png"
+						},
+						{
+							"key": "name",
+							"value": "Hat",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "2000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/items",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all items",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/items",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/items/62dca1abb37ce7d0317d83f6",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"items",
+						"62dca1abb37ce7d0317d83f6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a voucher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "my voucher one",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "buy_type",
+							"value": "only me usage",
+							"type": "text"
+						},
+						{
+							"key": "payment_method",
+							"value": "Visa",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/hp/Pictures/harvard.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/vouchers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vouchers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gel all vouchers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/vouchers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vouchers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a voucher",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/vouchers/62dd08dd5595f9b05ed31955",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vouchers",
+						"62dd08dd5595f9b05ed31955"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purchase items",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"evoucher_code\":\"62dd08dd5595f9b05ed31955\",\n    \"item_id\":\"62dca1abb37ce7d0317d83f6\",\n    \"quantity\":20,\n    \"payment_method\":\"Visa\",\n    \"card\":{\"number\": \"4242424242424242\",\n        \"exp_month\": 2,\n        \"exp_year\": 2023,\n        \"cvc\": \"314\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/checkout/order",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"checkout",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all order histories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmRjOWI4YTRjOGJiYmI2NDEyODFmOTAiLCJpYXQiOjE2NTg2MjY0MDN9.m8NtWjL3dCF2v6bWPULo2EyOt_OoPAFAVOF68rJ4660",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/checkout/histories",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"checkout",
+						"histories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
