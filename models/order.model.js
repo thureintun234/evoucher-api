@@ -10,6 +10,10 @@ const orderSchema = mongoose.Schema(
       type: String,
       default: "Cash",
     },
+    card: {
+      type: Object,
+      required: true,
+    },
     item_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Item",
